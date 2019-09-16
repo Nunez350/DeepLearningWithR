@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#cyclical coordiante descent in a path-wise fashion\nfit1=glmnet(x,y)\npredict(fit1,newx=x[1:5,],s=c(0.01,0.005))\npredict(fit1,type=\"coef\")\nplot(fit1,xvar=\"lambda\")\nfit2=glmnet(x,g2,family=\"binomial\")\npredict(fit2,type=\"response\",newx=x[2:5,])\npredict(fit2,type=\"nonzero\")\nfit3=glmnet(x,g4,family=\"multinomial\")\npredict(fit3,newx=x[1:3,],type=\"response\",s=0.01)\nx\ny<-t\ndata(BinomialExample)\ndata(PoissonExample)\ndata(MultiGaussianExample)\ndata(MultinomialExample)\n\ntype.measure=\"class\"\napplies to binomial and multinomial logistic regression only, and gives misclassification\nerror. \ntype.measure=\"auc\" is for two-class logistic regression only\n\ncv.2\n?cv.coxnet\ns. glmnet_softmax does the classification for multinomial models. \nnonzeroCoef(fit)# determines in an efficient manner which variables are nonzero in each fit\nsummary(fit)\nfit$\nhead(fit)\nView(cv.2)\nplot( 1:length(cv.2$lambda), cv.2$cvm ,xlab = expression(lambda), ylab= \"Mean cross-validated error\")#mean cross-validated error - a vector of length length(lambda).\npoints(1:length(cv.2$lambda), cv.2$cvsd)\n#plot( 1:length(cv.2$lambda), cv.2$cvsd ,xlab = \"iterations\", ylab= \"Mean cross-validated error\")#mean cross-validated error - a vector of length length(lambda).\ncvsd\nestimate of standard error of cvm\nlength(cv.2$cvm)\nlength(cv.2$lambda)\ncv.2$lambda\ncv.2$name\nc<-cv.2\nplot(c$glmnet.fit)\nfit\ncoef(fit,s=0.01) \nlength(coef(fit,s=0.01) )\nplot(coef(fit,s=0.01), 1:length(coef(fit,s=0.01) )) #)\nplot(1:length(coef(fit,s=cv$lambda.1se)), coef(fit, s=cv$lambda.1se))\ncoef(fit, s=c(\"lambda.1se\",\"lambda.min\"))\nglmnet.control() ",
+    "created" : 1501724472017.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2529472763",
+    "id" : "56C76123",
+    "lastKnownWriteTime" : 5292976842137927686,
+    "last_content_update" : 1501799905111,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled3"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

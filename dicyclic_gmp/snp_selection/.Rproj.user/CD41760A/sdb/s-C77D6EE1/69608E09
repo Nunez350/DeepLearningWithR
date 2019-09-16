@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# simulate SNP-cdg correlation\nr <- 0.2 # desired correlation coefficient\nsigma <- matrix(c(1,r,r,1), ncol=2) # var-covariance matrix\ns <- chol(sigma) # choleski decomposition\nn <- 100 # number of random deviates (data points)\nz <- s %*% matrix(rnorm(n*2), nrow=2) # 100 correlated normally distributed deviates with cor(x,y)=r\nu <- pnorm(z) # get probabilities for each deviates\nsnp.states <- qbinom(u[1,], 1, 0.5) # discretize the 1st vector of probabilities into 0/1 with Bernoulli trial\nidx.0 <- which(snp.states == 0); # indices for \"0\"\nidx.1 <- which(snp.states == 1); # indices for \"1\"\n# boxplots with stripcharts\nboxplot(u[2,] ~ snp.states, main=\"cor=0.2\", xlab=\"SNP states\", ylab=\"CDG level\")\nstripchart(u[2,] ~ snp.states, vertical=T, pch=1, method=\"jitter\", col=2,  add=T)\n\n\n\nr <- 0.8 # desired correlation coefficient\nsigma <- matrix(c(1,r,r,1), ncol=2) # var-covariance matrix\n?chol\ns <- chol(sigma) # choleski decomposition\nn <- 100 # number of random deviates (data points)\nz <- s %*% matrix(rnorm(n*2), nrow=2) # 100 correlated normally distributed deviates with cor(x,y)=r\nu <- pnorm(z) # get probabilities for each deviates\nsnp.states <- qbinom(u[1,], 1, 0.5) # discretize the 1st vector of probabilities into 0/1 with Bernoulli trial\nidx.0 <- which(snp.states == 0); # indices for \"0\"\nidx.1 <- which(snp.states == 1); # indices for \"1\"\n# boxplots with stripcharts\nboxplot(u[2,] ~ snp.states, main=\"cor=0.8\", xlab=\"SNP states\", ylab=\"CDG level\")\nstripchart(u[2,] ~ snp.states, vertical=T, pch=1, method=\"jitter\", col=2,  add=T)\n\n\nr <- 0.5 # desired correlation coefficient\nsigma <- matrix(c(1,r,r,1), ncol=2) # var-covariance matrix\ns <- chol(sigma) # choleski decomposition\ns\nn <- 100 # number of random deviates (data points)\nz <- s %*% matrix(rnorm(n*2), nrow=2) # 100 correlated normally distributed deviates with cor(x,y)=r\nz\nu <- pnorm(z) # get probabilities for each deviates\nu\nsnp.states <- qbinom(u[1,], 1, 0.5) # discretize the 1st vector of probabilities into 0/1 with Bernoulli trial\n?qbinom\nsnp.states\nidx.0 <- which(snp.states == 0); # indices for \"0\"\nidx.1 <- which(snp.states == 1); # indices for \"1\"\n# boxplots with stripcharts\nu[2,]\nboxplot(u[2,] ~ snp.states, main=\"cor=0.5\", xlab=\"SNP states\", ylab=\"CDG level\")\nstripchart(u[2,] ~ snp.states, vertical=T, pch=1, method=\"jitter\", col=2,  add=T)\n\n",
+    "created" : 1501625062629.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2553885505",
+    "id" : "69608E09",
+    "lastKnownWriteTime" : 6,
+    "last_content_update" : 1501625683860,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

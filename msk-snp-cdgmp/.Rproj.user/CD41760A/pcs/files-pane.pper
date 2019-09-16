@@ -1,0 +1,9 @@
+{
+    "path" : "~/msk-snp-cdgmp",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

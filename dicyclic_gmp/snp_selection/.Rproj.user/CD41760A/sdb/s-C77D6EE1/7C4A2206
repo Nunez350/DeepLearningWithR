@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all=TRUE))\nsource('~/machine_learning/dicyclic_gmp/snp_selection/di_ci_gmp.R')\n\ntest_pca_plots<-function(x,s,e){\n  #  par(mfrow=c(2,5)) \n  lapply(snp.by.gene.uniq[s:e], function(x){\n    i=parent.frame()$i[]\n    i<-i+(s-1)\n    #d.gene<-dist(t(x))\n    #if(princomp(t(x))$scores){\n    pca_scores<-princomp(t(x))$scores\n    #}else{te<-prcomp(t(x))$scores}\n    \n    #pca_scores<-princomp(t(x))$scores\n    \n    return(tryCatch(plot(pca_scores,main=c(paste(\"gene\",i),paste(\"SNPS\",nrow(x)))), error=function(e) NULL))    \n  }\n  )\n}\n\n?princomp()  \n\ntest_pca_plots(snp.by.gene.uniq,1,9)\n\n#return(plot(tsne(d.gene)))\ns<-1;e<-3\npca_scores<-list()\ntest_pca_plots<-function(x,s,e){\n  #  par(mfrow=c(2,5)) \n  out<-lapply(x, function(x){\n    i=parent.frame()$i[]\n    i<-i+(s-1)\n    if(nrow(x) > ncol(x)){\n      princomp(x)$scores\n    }\n    else{return((\"NA\"))}\n    #return(tryCatch(plot(pca_scores,main=c(paste(\"gene\",i),paste(\"SNPS\",nrow(x)))), error=function(e) NULL))    \n  }\n  )\n  return(out)\n}\nnn<-test_pca_plots(t(snp.by.gene.uniq),1,50)\n\nnn[1:9]\nt(snp.by.gene.uniq[[1]])\n\npca_scores<-test_pca_plots(snp.by.gene.uniq,1,50)\nif()\n  tryCatch(tt!=0)\ndim(snp.by.gene.uniq[[8]])\ntry(princomp(t(snp.by.gene.uniq[[8]])))\nprincomp(t(snp.by.gene.uniq[[9]]))\n?try\n?tryCatch()\n\ndim(pca_scores)\nstr(pca_scores)\n\npar(mfrow=c(2,5)) \ntest_pca_plots<-function(x,s,e){\n\n  lapply(x[s:e], function(x){\n  i=parent.frame()$i[]\n  i<-i+(s-1)\n  d.gene<-dist(t(x))\n  return(plot(princomp(t(x))$scores,\n              main=c(paste(\"gene \",i), paste(\"SNPS\",nrow(x))\n                     )\n              ))\n  #return(plot(tsne(d.gene)))\n    }\n  }\n)\npar(mfrow=c(2,5)) \nn1\nn2\nx<-gene1\nt(x)\ntest_pca_plots<-function(x,s,e){\n#  par(mfrow=c(2,5)) \n  lapply(snp.by.gene.uniq[s:e], function(x){\n  i=parent.frame()$i[]\n  i<-i+(s-1)\n  #d.gene<-dist(t(x))\n  if(princomp(t(x))$scores){\n    pca_scores<-princomp(t(x))$scores\n  }else{te<-prcomp(t(x))$scores}\n  \n  #pca_scores<-princomp(t(x))$scores\n  \n  \n  return(plot(pca_scores,main=c(paste(\"gene\",i),paste(\"SNPS\",nrow(x))))\n  }#else{next}\n    #return(plot(tsne(d.gene)))\n)\n}\n\n?princomp()  \ntest_pca_plots(snp.by.gene.uniq,1,10)\n  par(mfrow=c(1,1)) \n\n  if(princomp(t(x))$scores){\n    te<-princomp(t(x))$scores\n  }else{te<-prcomp(t(x))$scores}\n\n  plot(prcomp(t(snp.by.gene.uniq))$scores)\ndim(te)\ndim(princomp(t(x))$scores)\nprcomp(t(x))$scores\n\nprincomp(t(snp.by.gene.uniq[[1]]))$scores\nprcomp(snp.by.gene.uniq[[9]])$scores\n\nif(exists(princomp(t(snp.by.gene.uniq[[1]]))$scores)){\n  print(prprincomp(t(snp.by.gene.uniq[[1]]))$scores)\n}\n\n\nplot(princomp(snp.by.gene.uniq[[8]])$scores)\nplot(princomp(snp.by.gene.uniq[[9]])$scores)\ndim(snp.by.gene.uniq[[9]])\ndim(gene1)\ntest\ntt<-princomp(snp.by.gene.uniq[[9]])$scores\nif(exists(\"tt\")){\n  print(tt)\n}else{next}\n\nplot(test,main=\"1-10\")\nplot(1:1000,1:1000)\npar(mfrow=c(1,1))  \n\n\n\n\n\n\n# test<-function(x,s,e){\n#   lapply(x[s:e], function(x){\n#     i=parent.frame()$i[]\n#     d.gene<-dist(t(x))\n#     i<-i+(s-1)\n#     return(plot(tsne(d.gene,initial_dims=nrow(x), perplexity = 2), main=c(paste(\"gene \",i), \n#                                                                           paste(\"SNPS\",nrow(x)))\n#                 \n#     ))\n#     #return(plot(tsne(d.gene)))\n#   }\n#   )\n# } \n# test(snp.by.gene.uniq,1,10)\n\nexit()\n<_\n<-\n  ",
+    "created" : 1501448764702.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4265964931",
+    "id" : "7C4A2206",
+    "lastKnownWriteTime" : 1501624215,
+    "last_content_update" : 1501624215325,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/pca.R",
+    "project_path" : "pca.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

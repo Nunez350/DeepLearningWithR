@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1501610117289.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "10|21|58|0|\n70|39|73|0|\n",
+    "hash" : "1570776956",
+    "id" : "C1530B53",
+    "lastKnownWriteTime" : 1501721002,
+    "last_content_update" : 1505099427838,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/lasso_regression.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

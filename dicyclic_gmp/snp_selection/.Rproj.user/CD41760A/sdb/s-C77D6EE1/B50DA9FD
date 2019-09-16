@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(\"grplasso\")\ndata(splice)\nstr(splice)\ncontr <- rep(list(\"contr.sum\"), ncol(splice) - 1)\nnames(contr) <- names(splice)[-1]\nfit <- grplasso(y ~ ., data = splice, model = LogReg(), lambda = 10,\n                contrasts = contr, standardize = TRUE)\nsplice$contr\nfit <- grplasso(t~ ., data = as.data.frame(t(snp.by.gene.uniq)), model = LogReg(), lambda = 10,contrasts = contr, standardize = TRUE)\nsnp<-as.data.frame(t(snp.by.gene.uniq))\nsnp<-as.matrix(t(snp.by.gene.uniq))\nt<-as.matrix(m.cdgmp)\n\n\nfit <- grplasso(t~ ., data = man), model = LogReg(), lambda = 10,contrasts = contr, standardize = TRUE)\nsnp<-cbind(snp,t)\nsnp\nas.data.frame(t(snp.by.gene.uniq))\ncbind(t(snp.by.gene.uniq)[[1]],t(snp.by.gene.uniq)[[1]])\ncbind(t(snp.by.gene.uniq[[2]]),t(snp.by.gene.uniq[[2]]))\nman<-NULL\nfor (i in 1:50){\n  \n  man<-cbind(man,t(snp.by.gene.uniq[[i]]))\n}\nt\n#man<-\n  man[,1078]\n\ndim(man)\n#man<-t(snp.by.gene.uniq[[2]])\nman<-cbind(man,t)\nman[,t]\nman<-as.data.frame(man)\ngrplasso(as.matrix(t(snp.by.gene.uniq[[1]])),as.matrix(t))\nsnp.by.gene.uniq\nas.matrix(t)\nas.matrix(t)\nas.matrix(man)\nstr(man)\nman[t]\n\n\n\n\n\n\n\n\n## Use the Logistic Group Lasso on the splice data set\ndata(splice)\n\n## Define a list with the contrasts of the factors\ncontr <- rep(list(\"contr.sum\"), ncol(splice) - 1)\nnames(contr) <- names(splice)[-1]\n\n## Fit a logistic model \nfit.splice <- grplasso(y ~ ., data = splice, model = LogReg(), lambda = 20,\n                       contrasts = contr, center = TRUE, standardize = TRUE)\n\n## Perform the Logistic Group Lasso on a random dataset\nset.seed(79)\n\nn <- 50  ## observations\np <- 4   ## variables\n\n## First variable (intercept) not penalized, two groups having 2 degrees\n## of freedom each\n\nindex <- c(NA, 2, 2, 3, 3)\n\n## Create a random design matrix, including the intercept (first column)\nx <- cbind(1, matrix(rnorm(p * n), nrow = n))\ncolnames(x) <- c(\"Intercept\", paste(\"X\", 1:4, sep = \"\"))\n\npar <- c(0, 2.1, -1.8, 0, 0)\nprob <- 1 / (1 + exp(-x %*% par))\nmean(pmin(prob, 1 - prob)) ## Bayes risk\ny <- rbinom(n, size = 1, prob = prob) ## binary response vector\n\n## Use a multiplicative grid for the penalty parameter lambda, starting\n## at the maximal lambda value\nlambda <- lambdamax(x, y = y, index = index, penscale = sqrt,\n                    model = LogReg()) * 0.5^(0:5)\n\n## Fit the solution path on the lambda grid\nfit2 <- grplasso(mat, y = groups, index = index, lambda = lambda, model = LogReg(),\n                penscale = sqrt,\n                control = grpl.control(update.hess = \"lambda\", trace = 0))\nsummary(fit2)\ngrplasso(x, y = y, index = index)\n## Plot coefficient paths\nplot(fit)\nindex\nlength(groups)\ndim(x)\nlength(y)\nlength(index)\ndim(mat)\nlength(groups)\nindex=c(1:7)\ngroups<-y[1:7]\nmat<-as.matrix(cbind(rep(1,30),t(snp.by.gene.uniq[[1]])))\nmat\ndim(mat)\ngrplasso(mat,groups, index)\nx\ndim(mat)\nlength(groups)\nlength(index)       \nlength(groups)\nlength(index)\ndim(mat)\nncol(mat)\nmat\ngroups <- as.matrix(ifelse(m.cdgmp < -1, 0,1 ))\ngrplasso(as.matrix(cbind(rep(1,30))),t(snp.by.gene.uniq[[1]]),as.matrix(t))\nstr(y)\ngroups<-y[1:7]\nncol(x)\nindex=colnames(snp.by.gene.uniq[[1]])\nindex=c(1:30)\n",
+    "created" : 1501869335264.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1444194046",
+    "id" : "B50DA9FD",
+    "lastKnownWriteTime" : 1502029587,
+    "last_content_update" : 1502029587390,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/group_lasso.R",
+    "project_path" : "group_lasso.R",
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 15,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

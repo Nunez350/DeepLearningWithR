@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "set.seed(500)\nlibrary(MASS)\ndata <- Boston\n\napply(data,2,function(x) sum(is.na(x)))\nindex <- sample(1:nrow(data),round(0.75*nrow(data)))\nround(0.75*nrow(data))\ntrain <- data[index,]\ntest <- data[-index,]\nlm.fit <- glm(medv~., data=train)\n\n\nmedv~.\nsummary(lm.fit)\npr.lm <- predict(lm.fit,test)\npr.lm\nMSE.lm <- sum((pr.lm - test$medv)^2)/nrow(test)\n\nmaxs <- apply(data, 2, max) \nmins <- apply(data, 2, min)\n\nscaled <- as.data.frame(scale(data, center = mins, scale = maxs - mins))\n\ntrain_ <- scaled[index,]\ntest_ <- scaled[-index,]\n\n\nlibrary(neuralnet)\nn <- names(train_)\nf <- as.formula(paste(\"medv ~\", paste(n[!n %in% \"medv\"], collapse = \" + \")))\nnn <- neuralnet(f,data=train_,hidden=c(5,3),linear.output=T)\nplot(nn)\nf\ndim(train_)\nhead(train_)\ncolnames(train_)\npr.nn <- compute(nn,test_[,1:13])\n\npr.nn_ <- pr.nn$net.result*(max(data$medv)-min(data$medv))+min(data$medv)\ntest.r <- (test_$medv)*(max(data$medv)-min(data$medv))+min(data$medv)\n\nMSE.nn <- sum((test.r - pr.nn_)^2)/nrow(test_)\nprint(paste(MSE.lm,MSE.nn))\n\n\npar(mfrow=c(1,2))\n\nplot(test$medv,pr.nn_,col='red',main='Real vs predicted NN',pch=18,cex=0.7)\nabline(0,1,lwd=2)\nlegend('bottomright',legend='NN',pch=18,col='red', bty='n')\n\nplot(test$medv,pr.lm,col='blue',main='Real vs predicted lm',pch=18, cex=0.7)\nabline(0,1,lwd=2)\nlegend('bottomright',legend='LM',pch=18,col='blue', bty='n', cex=.95)\n\nplot(test$medv,pr.nn_,col='red',main='Real vs predicted NN',pch=18,cex=0.7)\npoints(test$medv,pr.lm,col='blue',pch=18,cex=0.7)\nabline(0,1,lwd=2)\nlegend('bottomright',legend=c('NN','LM'),pch=18,col=c('red','blue'))\n\n\nlibrary(boot)\nset.seed(200)\nlm.fit <- glm(medv~.,data=data)\ncv.glm(data,lm.fit,K=10)$delta[1]\n\nset.seed(450)\ncv.error <- NULL\nk <- 10\n\nlibrary(plyr) \npbar <- create_progress_bar('text')\npbar$init(k)\n\nfor(i in 1:k){\n  index <- sample(1:nrow(data),round(0.9*nrow(data)))\n  train.cv <- scaled[index,]\n  test.cv <- scaled[-index,]\n  \n  nn <- neuralnet(f,data=train.cv,hidden=c(5,2),linear.output=T)\n  \n  pr.nn <- compute(nn,test.cv[,1:13])\n  pr.nn <- pr.nn$net.result*(max(data$medv)-min(data$medv))+min(data$medv)\n  \n  test.cv.r <- (test.cv$medv)*(max(data$medv)-min(data$medv))+min(data$medv)\n  \n  cv.error[i] <- sum((test.cv.r - pr.nn)^2)/nrow(test.cv)\n  \n  pbar$step()\n}\nmean(cv.error)\n\nboxplot(cv.error,xlab='MSE CV',col='cyan',\n        border='blue',names='CV error (MSE)',\n        main='CV error (MSE) for NN',horizontal=TRUE)\n\n# \n# ?sweep\n# %*%\n#   ?crossprod()\n#   \n#   \nlibrary(neuralnet)\ndata(iris)\niris$Species <- with(iris, Species == 'setosa') # making some binary variable\niris$Species\nneuralnet(Species ~ ., data = iris)\n# Error in terms.formula(formula) : '.' in formula and no 'data' argument\ncn <- paste(colnames(iris)[1:4], collapse = ' + ')\ncn<-paste(colnames(snp.by.gene.uniq[[1]]), collapse = '+')\nfo <- as.formula(paste('SNPS', '~', cn)) # define the formulafo <- as.formula(paste('Species', '~', cn)) # define the formula\nas.formula(paste(snp.by.gene.uniq[[1]]()\n# [1] \"Sepal.Length + Sepal.Width + Petal.Length + Petal.Width\"\nfo <- as.formula(paste('Species', '~', cn)) # define the formulafo <- as.formula(paste('Species', '~', cn)) # define the formula\nfo\n\nhead(iris)\n# Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width\nneuralnet(fo, data = iris, linear.output=FALSE)\n\n# Call: neuralnet(formula = fo, data = iris, linear.output = FALSE) # needs tweaking but works\n# \n# 1 repetition was calculated.\n#\n#          Error Reached Threshold Steps\n# 1 0.01298571046    0.009784036357    90\n",
+    "created" : 1501190273044.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3319598215",
+    "id" : "874F30B3",
+    "lastKnownWriteTime" : 6,
+    "last_content_update" : 1501196192085,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled10"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

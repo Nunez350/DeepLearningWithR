@@ -1,0 +1,87 @@
+rm(list=ls(all=TRUE))
+library(ape)
+library(phylobase)
+library(phylotools)
+setwd("/Users/roynunez/patric_3_pipeline/borrelia_rickettsia")
+tr<-read.tree("bore-rick.dnd4")
+tr.unrooted <- unroot(tr)
+ph <-  read.table("borrelia-rickettsia-presence-absence.txt", header = T , sep="\t", row.names = 1)#, row.names = 1)
+ph.mat <- as.matrix(ph)
+ph.t <- t(ph.mat)
+rownames(ph.t) <- gsub("X", "x", rownames(ph.t))
+ph.t[tr.unrooted$tip.label,1]
+class(ph.t[tr$tip.label,1])
+ph.t
+class(ph.t[tr.unrooted$tip.label,1])
+ace(ph.t[tr.unrooted$tip.label,1],tr,type= "d")
+strep.ace<-ace(ph.t[tr.unrooted$tip.label,1],tr,type= "d")
+class(tr)
+strep.ace
+colnames(ph.t)[column]
+
+co <- c("blue", "yellow")
+plot.mpr <- function(column=1) {
+  plot.phylo(tr.unrooted, main = colnames(ph.t)[column])
+  tmpr<-MPR(ph.t[,column], tr.unrooted, outgroup = "x412418.11")
+  #nodelabels(paste("[", tmpr[, 1], ",", tmpr[, 2], "]", sep = "")) 
+  tiplabels(ph.t[,column][tr.unrooted$tip.label], adj = -2)
+  return(tmpr)
+}
+ph.t[,1]
+
+#  MPR(ph.t[,1], tr.unrooted, outgroup = "x412418.11")
+plot.mpr(1)
+tr.unrooted$node.label<- NULL
+tr.unrooted
+tmpr
+datalist <- data.frame(fam=character(), a=numeric(), b=numeric(), c=numeric())
+for (i in 1:ncol(ph.t)) {
+  tmpr<-MPR(ph.t[,i], tr.unrooted, outgroup = "x412418.11");
+  tmpr
+  out<-c(colnames(ph.t)[i],tmpr[,1])
+  datalist <- rbind(datalist, data.frame(fam=colnames(ph.t)[i],a=tmpr[1,1], b=tmpr[2,1], c=tmpr[3,1], d=tmpr[4,1],e=tmpr[5,1],f=tmpr[6,1],g=tmpr[7,1],h=tmpr[8,1],i=tmpr[9,1], j=tmpr[10,1],k=tmpr[11,1],l=tmpr[12,1],m=tmpr[13,1],n=tmpr[14,1],o=tmpr[15,1],p=tmpr[16,1],q=tmpr[17,1],r=tmpr[18,1],s=tmpr[19,1],t=tmpr[20,1],u=tmpr[21,1], v=tmpr[22,1]))
+}
+datalist
+tmpr
+#for (j in lenth(alpha.pfam) {
+#  alpha.pfam <-paste(letters[1:22])
+#lapply rbind(datalist2, data.frame(fam=colnames(ph.t)[i], alpha.pfam[j]=tmpr[i+1]))
+out
+nrow(datalist)
+tr.unrooted$edge
+tmpr
+[,1]
+#output <- apply(tr.unrooted$edge, 1, function(x){parent<-x[1]; child<-x[2]; tip.state<-ph.t[,1]; names(tip.state)<-1:29; child.vecter <- c(tmpr[,1], tip.state); parent.state<-tmpr[which(names(tmpr[,1])==parent),1]; child.state<-child.vector[which(names(child.vector)==child)]; c(parent.id=parent, parent.state=parent.state, child.id=child, child.state=child.state)})
+output <- apply(tr.unrooted$edge, 1, function(x){parent<-x[1]; child<-x[2]; tip.state<-ph.t[,1]; names(tip.state)<-1:29; child.vecter <- c(tmpr[,1], tip.state); parent.state<-tmpr[which(names(tmpr[,1])==parent),1]; child.state<-child.vecter[which(names(child.vecter)==child)]; c(parent.id=parent, parent.state=parent.state, child.id=child, child.state=child.state)})
+#output <- apply(tr.unrooted$edge, 1, function(x){parent<-x[1]; child<-x[2]; tip.state<-ph.t[,1]; names(tip.state)<-1:29; child.vecter <- c(tmpr[,1], tip.state); parent.state<-tmpr[which(names(tmpr[,1])==parent),1]; child.state<-child.vecter[which(names(child.vecter)==child)]; rbind(output, data.frame(parent.id=parent, parent.state=parent.state, child.id=child, child.state=child.state))})
+output
+
+dataframe2t<-head(t(as.data.frame(output, row.names = c("p", "p.state", "c", "c.state"), col.names=paste("br", 1:55, sep=""))), n=55)
+df2<-cbind(dataframe2t,dataframe2t[,4] - dataframe2t[,2])
+df2
+colnames(df2)[5]<-"gain.loss"
+head(df2)
+nrow(df2)
+df2
+gains<-which(df2[,5]>0)
+
+losses<-which(df2[,5]<0)
+tr.unrooted$edge.length
+
+plot(tr,use.edge.length = F)
+
+gains
+losses
+edgelabels(gains, adj = c(0.5,-0.25), col=4, frame= "none")
+edgelabels(losses, adj = c(0.5,1.25), col=4, frame= "none")
+edgelabels(gains, col=2, frame= "none")
+nameid<-read.table("tree-sorted-genome-id-name.txt", sep="\t")
+
+nameid
+gsub("^(..........).+$", "\\1", paste("", namemid[,2], sep=""), perl = T)
+nameid[,2]
+tr$tip.label<-as.character(nameid[,2])
+tr$tip.label
+rownames(namemid) <- gsub("^(..........).+$", "\\1", paste("g_", namemid[,1], sep=""), perl = T)
+rownames(namemid) <- gsub("^(..........).+$", "\\1", paste("g_", namemid[,1], sep=""), perl = T)
+plot(str)

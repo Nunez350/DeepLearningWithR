@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# simulate SNP-cdg correlation\nr <- 0.2 # desired correlation coefficient\nsigma <- matrix(c(1,r,r,1), ncol=2) # var-covariance matrix\ns <- chol(sigma) # choleski decomposition\nn <- 100 # number of random deviates (data points)\nz <- s %*% matrix(rnorm(n*2), nrow=2) # 100 correlated normally distributed deviates with cor(x,y)=r\nu <- pnorm(z) # get probabilities for each deviates\nsnp.states <- qbinom(u[1,], 1, 0.5) # discretize the 1st vector of probabilities into 0/1 with Bernoulli trial\nidx.0 <- which(snp.states == 0); # indices for \"0\"\nidx.1 <- which(snp.states == 1); # indices for \"1\"\n# boxplots with stripcharts\nboxplot(u[2,] ~ snp.states, main=\"cor=0.2\", xlab=\"SNP states\", ylab=\"CDG level\")\nstripchart(u[2,] ~ snp.states, vertical=T, pch=1, method=\"jitter\", col=2,  add=T)\n\n\n\nr <- 0.8 # desired correlation coefficient\nsigma <- matrix(c(1,r,r,1), ncol=2) # var-covariance matrix\n?chol\ns <- chol(sigma) # choleski decomposition\nn <- 100 # number of random deviates (data points)\nz <- s %*% matrix(rnorm(n*2), nrow=2) # 100 correlated normally distributed deviates with cor(x,y)=r\nu <- pnorm(z) # get probabilities for each deviates\nsnp.states <- qbinom(u[1,], 1, 0.5) # discretize the 1st vector of probabilities into 0/1 with Bernoulli trial\nidx.0 <- which(snp.states == 0); # indices for \"0\"\nidx.1 <- which(snp.states == 1); # indices for \"1\"\n# boxplots with stripcharts\nboxplot(u[2,] ~ snp.states, main=\"cor=0.8\", xlab=\"SNP states\", ylab=\"CDG level\")\nstripchart(u[2,] ~ snp.states, vertical=T, pch=1, method=\"jitter\", col=2,  add=T)\n\n\nr <- 0.5 # desired correlation coefficient\nsigma <- matrix(c(1,r,r,1), ncol=2) # var-covariance matrix\ns <- chol(sigma) # choleski decomposition\ns\nn <- 100 # number of random deviates (data points)\nz <- s %*% matrix(rnorm(n*2), nrow=2) # 100 correlated normally distributed deviates with cor(x,y)=r\nz\nu <- pnorm(z) # get probabilities for each deviates\nu\nsnp.states <- qbinom(u[1,], 1, 0.5) # discretize the 1st vector of probabilities into 0/1 with Bernoulli trial\n?qbinom\nsnp.states\nidx.0 <- which(snp.states == 0); # indices for \"0\"\nidx.1 <- which(snp.states == 1); # indices for \"1\"\n# boxplots with stripcharts\nu[2,]\nboxplot(u[2,] ~ snp.states, main=\"cor=0.5\", xlab=\"SNP states\", ylab=\"CDG level\")\nstripchart(u[2,] ~ snp.states, vertical=T, pch=1, method=\"jitter\", col=2,  add=T)\n\n\n\n\nlibrary(SimPhe)\n\nx1 <- rnorm(4000, mean = 5, sd = 10)\nx2 <- rnorm(4000, mean = 10, sd = 30)\nx <- matrix(cbind(x1, x2), ncol = 2)\n# test original correlation\ncor.test(x[, 1], x[, 2])\n# correlation matrix\ncorM <- matrix(c(1, 0.6, 0.6, 1), ncol = 2)\n# standard deviation matrix\nsdM <- matrix(c(10, 0, 0, 30), ncol = 2)\n# build correlation\nx.new <- build.cor.phe(x, corM, sdM)\n# check mean and standard deviation of new data set\napply(x.new, 2, mean)\napply(x.new, 2, sd)\n# test correlation\ncor.test(x.new[, 1], x.new[, 2])\nx.new[, 1]\n\nx1 <- rnorm(4000, mean = 5, sd = 10)\nx2 <- rnorm(4000, mean = 10, sd = 30)\nx <- matrix(cbind(x1, x2), ncol = 2)\nbuild.sd.matrix(x)\n\n\n\n\n\nlibrary(scrime)\nsimulateSNPglm()\nsim.snp<-simulateSNPglm(30, 50, list.ia = NULL, list.snp = NULL, \n               beta0 = -0.5, beta = 1.5, maf = 0.25, sample.y = TRUE, p.cutoff = 0.5, rand = NA)\nsim.snp\n",
+    "created" : 1501626577046.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3881509641",
+    "id" : "81988ABD",
+    "lastKnownWriteTime" : 1501721002,
+    "last_content_update" : 1501721002016,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/simulations_data.R",
+    "project_path" : "simulations_data.R",
+    "properties" : {
+        "tempName" : "Untitled3"
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

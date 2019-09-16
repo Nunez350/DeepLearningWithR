@@ -1,0 +1,105 @@
+library(ape)
+library(phylobase)
+library(phylotools)
+setwd("/Users/roynunez/patric_3_pipeline/borrelia_rickettsia")
+tr<-read.tree("~/Downloads/strep-tree-qui.dnd")
+tr.unrooted <- unroot(tr)
+
+
+options(max.print = 900)
+ph <-  read.table("~/Desktop/jjj/var-fams-3.csv", header = T , sep=",", row.names = 1)
+ph.mat <- as.matrix(ph)
+ph.t <- t(ph.mat)
+strep.ace<-ace(ph.t[,1],tr,type= "d")
+co <- c("blue", "yellow")
+#plot(tr, "c", F, no.margin = T, label.offset = 1)
+#plotting using the most parsimonious ancestral reconstruction method
+plot.mpr <- function(column=1) {
+  plot.phylo(tr.unrooted, main = colnames(ph.t)[column])
+  tmpr<-MPR(ph.t[,column], tr.unrooted, outgroup = "gid_1311.1320")
+  nodelabels(paste("[", tmpr[, 1], ",", tmpr[, 2], "]", sep = "")) 
+  tiplabels(ph.t[,column][tr.unrooted$tip.label], adj = -2)
+  return(tmpr)
+}
+tmpr
+ph.t
+plot.mpr(1)
+#intializing empty datalist to collect character states for each node
+datalist <- data.frame(fam=character(), a=numeric(), b=numeric(), c=numeric())
+for (i in 1:ncol(ph.t)) {
+  #for (i in 1:10) {
+  tmpr<-MPR(ph.t[,i], tr.unrooted, outgroup = "gid_1311.1320");
+  out<-c(colnames(ph.t)[i],tmpr[,1])
+  datalist <- rbind(datalist, data.frame(fam=colnames(ph.t)[i], a=tmpr[1,1], b=tmpr[2,1], c=tmpr[3,1]))
+}
+
+tmpr
+strep.character.states<-do.call(rbind, datalist,quote = T)
+write.table(strep.character.states,"strep-ancestrial-states.txt",quote = FALSE)
+
+
+################################  
+#function computes the number of changes on each branch as well as the total amount of changes
+ct.change <- function(dframe){
+  as.data.frame(df)
+  changect <- 0; n.changes<-0; branch<-0; total<-0; rowchange<-0; sumrow<-0;row.changes<-0
+  for (i in 1:ncol(dframe)){
+    for (j in 1:(nrow(dframe)-1)){
+      if (TRUE && dframe[j,i] != dframe[(j+1),i]) {
+        changect <- changect +1
+      } else{next}
+      if (TRUE && dframe[i,j] != dframe[i,(j+1)]) {
+        rowchange <- rowchange +1
+      } else{next}
+      
+      
+      n.changes[[j]]<-rowchange
+      
+    }
+    
+    rec<-changect; total<-total+rec
+    n.changes[[i]] <- changect
+    branch[[i]] <- colnames(strep.df[i])
+    n.changes[i+1] <-total
+    branch[[i+1]] <- "total number of changes"
+    n.changes[i+2]<-sumrow
+    df<-rbind(branch,n.changes)  
+    changect <- 0
+  }
+  return(df)
+}
+
+dim(strep.df)
+head(strep.df)
+#converting matrix data into a dataframe to remove quotes and first column to appropiately allocate for colnames
+strep.df <- as.data.frame(strep.character.states[,-1])
+rname<-strep.character.states[,1]
+rownames(strep.df)<-rname
+ace.changes<-ct.change(strep.df)
+ace.changes
+
+######################
+head(datalist)
+#datalist <- data.frame(fam=character(), a=numeric(), b=numeric(), c=numeric())
+ph.node.states <- cbind(ph, datalist[,2:4])
+str(ph.node.states)
+ph.node.states$a.1320 <- ph.node.states[,1] - ph.node.states[,6]
+ph.node.states$c.1322 <- ph.node.states[,3] - ph.node.states[,8]
+ph.node.states$c.1324 <- ph.node.states[,5] - ph.node.states[,8]
+ph.node.states$b.c <- ph.node.states[,8] - ph.node.states[,7]
+ph.node.states$b.1321 <- ph.node.states[,2] - ph.node.states[,7]
+ph.node.states$a.b <- ph.node.states[,7] - ph.node.states[,6]
+ph.node.states$a.1323 <- ph.node.states[,4] - ph.node.states[,6]
+
+write.table(ph.node.states, "node.states.txt", sep="\t", quote = F)
+head(ph.node.states)
+?apply
+apply(ph.node.states[,9:15], 2,function(x) length(which(x>0)))
+tr.unrooted <- unroot(tr)
+gains<-apply(ph.node.states[,9:15], 2, function(x) length(which(x>0)))
+losses<-apply(ph.node.states[,9:15], 2, function(x) length(which(x<0)))
+plot(tr.unrooted)
+edgelabels(gains, adj = c(0.5,-0.25), col=2, frame= "none")
+edgelabels(losses, adj = c(0.5,1.25), col=4, frame= "none")
+
+

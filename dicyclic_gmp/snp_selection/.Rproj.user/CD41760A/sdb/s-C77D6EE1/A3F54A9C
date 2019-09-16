@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all=TRUE))\n\nlibrary(\"tsne\")\n#library(\"Rtsne\")\nsnp.data<-read.csv(\"~/msk-snp-cdgmp/cdg-data/cdgSNPmatrix-Jinyuan_roy.csv\", sep =\",\", header = T, row.names = 1)\nsnp.by.gene <- split(snp.data, strtrim(rownames(snp.data), 8))\nsnp.by.gene.uniq <- lapply(snp.by.gene, function(x) unique(x))\nsnps<-lapply(snp.by.gene.uniq, function(x) t(x))\ncdgmp.data<-read.csv(\"~/msk-snp-cdgmp/cdg-data/cdgTable.csv2\", sep =\",\", header =T)\nm.cdgmp<-tapply(cdgmp.data$logcdg,cdgmp.data$strains,mean )\nnames(m.cdgmp)[16]<-gsub(\"pa_.+_\", \"\", names(m.cdgmp)[16])\nm.cdgmp<-m.cdgmp[rownames(snps[[1]])]\ngene1<-snp.by.gene.uniq[[1]]\ngroups <- as.matrix(ifelse(m.cdgmp < -1, 0,1 ))\n\nmt<-t(gene1)\n\nsplit<-sample(nrow(mt), floor(0.70*nrow(mt)))\n\ntrain<-mt[split,]\ntest<-mt[-split,]\ndim(train)\n#?tsne\nd.gene1<-dist(snp.by.gene.uniq[[1]])\ngene50<-snp.by.gene.uniq[[50]]\ngene1<-snp.by.gene.uniq[[1]]\nd.gene50<-dist(snp.by.gene.uniq[[50]])\nn1<-31\nn2<-40\n\n\n\npar(mfrow=c(2,5))  \n\ntsne_plots<-function(x,s,e){\n  lapply(x[s:e], function(x){\n    i=parent.frame()$i[]\n    d.gene<-dist(t(x))\n    i<-i+(s-1)\n    return(plot(tsne(d.gene,initial_dims=nrow(x), perplexity = 2), main=c(paste(\"gene \",i), \n                                                                          paste(\"SNPS\",nrow(x)))\n                \n    ))\n    #return(plot(tsne(d.gene)))\n  }\n  )\n}  \n\nrun.tsne.plot<-function(){\n  pdf(\"TSNE_SNPS\")\n  par(mfrow=c(2,5)) \n  tsne_plots(snp.by.gene.uniq, 1,10)\n  tsne_plots(snp.by.gene.uniq, 11,21)\n  tsne_plots(snp.by.gene.uniq, 22,33)\n  tsne_plots(snp.by.gene.uniq, 34,45)\n  #par(mfrow=c(1,5))\n  tsne_plots(snp.by.gene.uniq, 46,50)\n  dev.off()\n  par(mfrow=c(1,1))\n}\n#run.tsne.plot()\n",
+    "created" : 1501408162922.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4084844600",
+    "id" : "A3F54A9C",
+    "lastKnownWriteTime" : 1501721001,
+    "last_content_update" : 1501721001740,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/tsne_tdsitributed_neighbor_embedding.R",
+    "project_path" : "tsne_tdsitributed_neighbor_embedding.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 1,
+    "source_on_save" : true,
+    "source_window" : "",
+    "type" : "r_source"
+}

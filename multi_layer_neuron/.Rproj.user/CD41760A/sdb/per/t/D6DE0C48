@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all=TRUE))\noriginal_df <- read.csv(\"iris.csv\")\ndf <- original_df[, -1]\ndf\noriginal_df\n# features array x\ninputs <- df[, 1:ncol(df)-1]\ninputs\n\ninputs <- data.matrix(inputs)\nx <- cbind(inputs, matrix(1, nrow = nrow(inputs), ncol = 1))\n# target array t\ntarget <- df[, ncol(df)]\ntarget\ntarget <- matrix(target, nrow = 150, ncol = 1)\ncategories <- unique(target)\ncategories\nt <- matrix(0, nrow = nrow(x), ncol = length(unique(target)))\nt\n\nfor (i in 1:3) {\n  t[which(target == categories[i]), i] <- 1\n}\n# construct target array to compare with output for computing accuracy\nfor (species.ix in 1:length(categories)) {\n  ix <- which(target == categories[species.ix])\n  target[ix,] <- species.ix\n}\ntarget <- as.numeric(target)\ntarget \n\n# create empty collection to store historical output\nweights_collection <- list()\nfor (neuron in 1:ncol(t)){\n  weights_collection[[neuron]] <- list()\n  for (weight in 1: ncol(inputs)) {\n    weights_collection[[neuron]][[weight]] <- list()\n  }\n}\naccuracy <- list()\n\n# initialize random weights (neuron=3, weights = 4 * 3)\neta <- 0.1\nw <- matrix(runif(12, min = 1e-3, max = 1e-2), nrow = 4, ncol = 3)\nb <- matrix(runif(3), nrow = 1, ncol = 3)\nweights_biases <- rbind(w, b)\nweights_biases\nstr(x)\nx\nfor (i in 1:1000) {\n  # compute weighted linear combination\n  weight_linear <- x %*% weights_biases\n  # compute neuron activity y\n  y <- exp(weight_linear) / rowSums(exp(weight_linear))\n  # compute errors e <- t - y\n  e <- t - y\n  \n  # update biases w_previous <- w_current - eta * (-sum(t - y) * x)\n  weights_biases[nrow(weights_biases),] <- weights_biases[nrow(weights_biases), ] - eta * (-colSums(e)) / nrow(t)\n  weights_biases\n  for (neuron in 1: ncol(t)) {\n    # append weights\n    for (weight in 1: ncol(inputs)) {\n      weights_collection[[neuron]][[weight]][[i]] <- weights_biases[1:nrow(weights_biases) - 1, neuron][weight]\n    }\n    # update weights\n    weights_biases[1:nrow(weights_biases) - 1, neuron] <- weights_biases[1:nrow(weights_biases) - 1, neuron] - eta * (-colSums(x[, 1:ncol(x) - 1] * e[, neuron])) / nrow(t)\n  }\n  \n  # compute accuracy\n  acc <- length(which(max.col(y) == target)) / nrow(t)\n  accuracy <- append(accuracy, acc)\n}\n\nweights_biases\nweights_collection[[1]]\n# visualize weights\ncl <- rainbow(ncol(t))\nplot(0, 0, xlim = c(1, 1000), ylim = c(-3, 3))\nfor (neuron in 1:ncol(t)) {\n  for (weight in 1:ncol(inputs)) {\n    lines(x = 1:1000, y = weights_collection[[neuron]][[weight]], col = cl[neuron], lty = weight)\n  }\n}\ntitle(\"Weights Variation\")\n\n# visualize accuracy\nplot(1:1000, accuracy)\ntitle(\"accuracy\")\n\n",
+    "created" : 1498534460659.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2194739286",
+    "id" : "D6DE0C48",
+    "lastKnownWriteTime" : 1498676884,
+    "last_content_update" : 1498676884202,
+    "path" : "~/machine_learning/multi_layer_neuron/john/MonteCarlo_Simulation-Biostats/Neuron_Networks/Multiple_Neuron_Classification.r",
+    "project_path" : "john/MonteCarlo_Simulation-Biostats/Neuron_Networks/Multiple_Neuron_Classification.r",
+    "properties" : {
+        "source_window_id" : "wg3kceuukdk0b"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

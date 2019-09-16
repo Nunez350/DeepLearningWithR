@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#lasso\nrm(list=ls(all=TRUE))\nlibrary(glmnet)\nsource('~/machine_learning/dicyclic_gmp/snp_selection/di_ci_gmp.R')\nt <- as.matrix(ifelse(m.cdgmp < -1, 0,1 ))\nclass(t)\ndim(t)\n\nt<-as.matrix(m.cdgmp)\ntg<-t(snp.by.gene.uniq[[49]])\n#dim(snp.by.gene.uniq[[49]])\nx<-tg\n\nc.lasso<-function(x){\n  x\n  dim(x)\n  hist(t(t))\n  plot(t)\n  dim(t)\n  split<-sample(nrow(x), floor(0.7*nrow(x)))\n  train.d<-as.matrix(cbind(x,t)[split,])\n  dim(train.d)\n  test.d<-as.matrix(cbind(x,t)[-split,])\n  dim(train.d)\n  train.d[,ncol(train.d)]\n  ?glmnet\n  fit2 <- glmnet(train.d, train.d[,ncol(train.d)], family = \"gaussian\")\n  fit2 <- glmnet(train.d, train.d[,ncol(train.d)], family = \"poisson\")\n  dim(train.d)\n  summary(fit2)\n  cv.2<-cv.glmnet(train.d,train.d[,ncol(train.d)],nfolds = 10)#cross_validate to get the best lambda\n  plot(cv.2)\n  summary(cv.2)\n  \n  pred<-predict(fit2, train.d, type=\"response\",s=cv.2$lambda.min)#predict\n  pred\n  \n  train.d[,ncol(train.d)]\n  pred==train.d[,ncol(train.d)]\n  round(pred)==train.d[,ncol(train.d)]\n  mod.prediction<-round(pred)==train.d[,ncol(train.d)]\n  length(which(mod.prediction==TRUE))\n  \n  acc<-length(round(pred)==nrow(train.d))/nrow(train.d)*100\n  return(acc)\n}\nc.lasso(x)\ndim(fit2$beta)\nplot(1:length(o),o$acc1)\nplot(1:100, fit2$beta[1,], type = \"l\", ylim=c(-9,8))\nlout<-list()\npar(mfrow=c(1,1)) \nsummary(fit2)\nlapply(snp.by.gene.uniq, function(x){\n  ac<-c.lasso(t(x))\n  print(ac)\n})\nfit2$betaplot(1:90, fit2$beta[1,], type = \"l\", ylim=c(-9,8))\nfit2$beta\nlout\nfit2$a0\n\n\n\n\n\n\nlibrary(SimPhe)\n\nx1 <- rnorm(4000, mean = 5, sd = 10)\nx2 <- rnorm(4000, mean = 10, sd = 30)\nx <- matrix(cbind(x1, x2), ncol = 2)\n# test original correlation\ncor.test(x[, 1], x[, 2])\n# correlation matrix\ncorM <- matrix(c(1, 0.6, 0.6, 1), ncol = 2)\n# standard deviation matrix\nsdM <- matrix(c(10, 0, 0, 30), ncol = 2)\n# build correlation\nx.new <- build.cor.phe(x, corM, sdM)\n# check mean and standard deviation of new data set\napply(x.new, 2, mean)\napply(x.new, 2, sd)\n# test correlation\ncor.test(x.new[, 1], x.new[, 2])\nx.new[, 1]\n\nx1 <- rnorm(4000, mean = 5, sd = 10)\nx2 <- rnorm(4000, mean = 10, sd = 30)\nx <- matrix(cbind(x1, x2), ncol = 2)\nbuild.sd.matrix(x)\n\n\nplot(xx, yy, type = \"l\")  ## plot density curve (or use `plot(d)`)\n\nplot\n\n\nplot(1:90, fit2$beta[1,], type = \"l\", ylim=c(-9,8))\nlines(1:90, fit2$beta[2,], type = \"l\", col=2)\nlines(1:90, fit2$beta[3,], type = \"l\", col=3)\nlines(1:90, fit2$beta[4,], type = \"l\", col=4)\nlines(1:90, fit2$beta[5,], type = \"l\", col=5)\nlines(1:90, fit2$beta[6,], type = \"l\", col=6)\n",
+    "created" : 1501718891008.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "13|21|45|0|\n",
+    "hash" : "1300335758",
+    "id" : "F3CB10D6",
+    "lastKnownWriteTime" : 1501720936,
+    "last_content_update" : 1505099091088,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/lasso_regression.3.R",
+    "project_path" : "lasso_regression.3.R",
+    "properties" : {
+        "tempName" : "Untitled3"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

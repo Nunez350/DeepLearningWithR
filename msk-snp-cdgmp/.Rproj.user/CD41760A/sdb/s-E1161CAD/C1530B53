@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#lasso\nrm(list=ls(all=TRUE))\nlibrary(glmnet)\nsource('~/machine_learning/dicyclic_gmp/snp_selection/di_ci_gmp.R')\nt <- as.matrix(ifelse(m.cdgmp < -1, 0,1 ))\n\ndim(snp.by.gene.uniq[[49]])\ntg<-t(snp.by.gene.uniq[[49]])\nx<-tg\n\nc.lasso<-function(x){\n  x\n  split<-sample(nrow(x), floor(0.7*nrow(x)))\n  train.d<-as.matrix(cbind(x,t)[split,])\n  test.d<-as.matrix(cbind(x,t)[-split,])\n  fit2 <- glmnet(train.d, train.d[,ncol(train.d)], family = \"binomial\")\n  cv.2<-cv.glmnet(train.d,as.matrix(train.d[,ncol(train.d)]),nfolds = 10)#cross_validate to get the best lambda\n  pred<-predict(fit2, train.d, type=\"response\",s=cv.2$lambda.min)#predict\n  round(pred)==train.d[,ncol(train.d)]\n  cv.2<-cv.glmnet(train.d[,-ncol(train.d)],train.d[,ncol(train.d)],nfolds = 10)#cross_validate to get the best lambda\n#fit.2<-glmnet(train.d[,-ncol(train.d)], train.d[,ncol(train.d)], family = \"binomial\")\n\n\n#fit<-glmnet(mtrain, mtrain[,ncol(mtrain)])######\n#cv<-cv.glmnet(mtrain,mtrain[,ncol(mtrain)],nfolds = 10)#cross_validate to get the best lambda\n#dim(mtrain)\n\nd#im(mtrain[,-ncol(mtrain)])\n\nplot(cv)\npred<-predict(fit, mtest, type=\"response\",s=cv$lambda.min)#predict\npred<-predict(fit2, train.d, type=\"response\",s=cv.2$lambda.min)#predict\nfit2\ndim(train.d)\npred\nplot(cv)\npred\nfit\nsummary(fit)\nround(pred)==mtest[,-ncol(mtrain)]\nmtest[,ncol(mtrain)]\nprediction<-round(pred)==mtest[,ncol(mtrain)]\naccuracy<-length(which(prediction == TRUE))/length(prediction)*100\npred2<-predict(fit, mtrain, type=\"response\",s=cv$lambda.min)#predict\nround(pred2)==mtrain[,-ncol(mtrain)]\nprediction2<-round(pred2)==mtrain[,ncol(mtrain)]\naccuracy2<-length(which(prediction2 == TRUE))/length(prediction2)*100\n\n\nt.m<-as.matrix(t(gene1))\nt.m%*%t\nco<-cor(t.m[,1:6])\n\nwhich(co > .6, arr.ind = T)\n\ndim(t.m)\ndim(t)\nreturn(list(acc1=accuracy, acc2=accuracy2))\n}\nc.lasso(t(snp.by.gene.uniq[[1]]))\nt(snp.by.gene.uniq[[1]])\ngetwd()\n\nsnp.by.gene.uniq\nh<-list()\nfor (i in 1:1000){\nsplit.indeces<-sample(length(snp.by.gene.uniq), floor(0.7*length(snp.by.gene.uniq)))\ntrial1<-snp.by.gene.uniq[split.indeces]\ntrial1.2<-snp.by.gene.uniq[-split.indeces]\n\nout<-lapply(trial1, function(gene_snp){\n    x<-t(gene_snp)\n    c.lasso(x)\n})\na1<-lapply(out,function(dx){\n  return(dx$acc1)\n})\nh[[i]]<-a1\n\n}\nh\ntable(unlist(h))\n\nlapply(out, function(o){\n  plot(1:length(o),o$acc1)\n})\n\n\nx<-NULL\no<-out\nplot(out)\na1<-lapply(out,function(dx){\n  return(dx$acc1)\n})\n\na2<-lapply(out,function(dx){\n  return(dx$acc2)\n})\nplot(1:35,unlist(a1))\nclass(a1)\n\n# #predict against itself\n# pred2<-predict(fit, mtrain, type=\"response\",s=cv$lambda.min)\n# round(pred2)==mtrain[,ncol(mtrain)]\n# \n# r<-as.matrix(cbind(tg,t)[split,])\n# pred3<-predict(fit, r, type=\"response\",s=cv$lambda.min)\n# round(pred3)==r[,ncol(r)]\n# x<-NULL\n# snp.by.gene.uniq\n# lapply(snp.by.gene.uniq, function(gene_snp){\n# gene_snp<-snp.by.gene.uniq[[1]]\n#   x<-t(gene_snp)\n#   x\n#   r<- as.matrix(cbind(x,t))\n#   r\n#   fit\n#   pred3<-predict(fit, r, type=\"response\",s=cv$lambda.min)\n#   round(pred3)==r[,ncol(r)]\n#   }\n# )\n# \n# dim(mtest)\n# \n# c.lasso(tg)\n# t(snp.by.gene.uniq[[8]])\n# tg<-t(snp.by.gene.uniq[[8]])\n# tg\n# save<-lapply(snp.by.gene.uniq, function(x){\n#   c.lasso(t(x))\n# }\n# )\n# save\n# length(save)\n# \n# \n# which(save ==TRUE)\n# r<-as.matrix(cbind(tg,t)[split,])\n# pred3<-predict(fit, r, type=\"response\",s=cv$lambda.min)\n# round(pred3)==r[,ncol(r)]\n",
+    "created" : 1501610117289.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "10|21|58|0|\n70|39|73|0|\n",
+    "hash" : "1570776956",
+    "id" : "C1530B53",
+    "lastKnownWriteTime" : 1501721002,
+    "last_content_update" : 1505099427838,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/lasso_regression.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

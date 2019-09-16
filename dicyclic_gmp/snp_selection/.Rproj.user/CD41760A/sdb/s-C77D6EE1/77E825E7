@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all=TRUE))\n\nlibrary(glmnet)\nsource('~/machine_learning/dicyclic_gmp/snp_selection/di_ci_gmp_data.R')\ntg<-t(snp.by.gene.uniq[[49]])#2 dim 3 by 30\nt<-m.cdgmp\nx<-tg#for testing purposes\n#c.lasso<-function(x){\n  split<-sample(nrow(x), floor(0.7*nrow(x)))\n  train.d<-as.matrix(cbind(x,t)[split,])\n  test.d<-as.matrix(cbind(x,t)[-split,])\n  train.m<-train.d[,-ncol(train.d)]\n  target<-train.d[,ncol(train.d)]\n  dim(train.m)\n  dim(train.d)\n  length(target)\n  target<-abs(target)\n  fit <- glmnet(train.m, target, family = \"poisson\")\n  target\n  pred\n  ?glmnet\n  fit$beta\n  plot(fit$beta)\n  plot(fit)\n  \n  plot(fit$a0)\n  #summary(fit)\n  \n  fit$beta\n  cv<-cv.glmnet(train.m,target,nfolds = 10)#cross_validate to get the best lambda\n  plot(cv)\n  plot(fit, xvar = \"lambda\", label = TRUE)\n  plot(fit, xvar = \"dev\", label = TRUE)\n  \n  pred<-predict(fit, train.m, type=\"response\",s=cv$lambda.min)#predict\n  plot(fit)\n  library(plotmo) # for plotres\n  plotres(fit)\n  dev.off()\n  #par(mar=c(4.5,4.5,1,4))\n  plot(fit)\n  vnat=coef(fit)\n  vnat=vnat[-1,ncol(vnat)] # remove the intercept, and get the coefficients at the end of the path\n  vn=paste(\"var\",1:24)\n  axis(4, at=vnat,line=-.5,label=vn,las=1,tick=FALSE, cex.axis=0.5)\n  pred\ntarget\n  result.difference<-pred-target\n  result.difference\n  #result.difference  \n\n\ncv\nggplot\nlattice , coefficients, \npredicted-target -gene\n\n\n\n\nplot(pred[,1], target)\nabline(lm( target ~ pred[,1]), col=2)\nsummary(lm( target ~ pred[,1]))\ncor.test(pred[,1], target)\npred[1,]\ntarget-pred\n\nopt.lam = c(cv$lambda.min, cv$lambda.1se)\ncoef(cv, s = opt.lam)\n\n\n",
+    "created" : 1501775003824.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "170768301",
+    "id" : "77E825E7",
+    "lastKnownWriteTime" : 1502200521,
+    "last_content_update" : 1502200521014,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/lasso_continous.R",
+    "project_path" : "lasso_continous.R",
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1500039741100.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "8644594",
+    "id" : "E2BA7065",
+    "lastKnownWriteTime" : 1551210095,
+    "last_content_update" : 1551210095,
+    "path" : "~/Library/Mobile Documents/com~apple~CloudDocs/machine_learning/msk-snp-cdgmp/cdg-data/july-14_nnet_cidigmp.R",
+    "project_path" : "cdg-data/july-14_nnet_cidigmp.R",
+    "properties" : {
+        "cursorPosition" : "0,0",
+        "notebook_format" : "html_document",
+        "scrollLine" : "3",
+        "tempName" : "Untitled5"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#calculating a single p-value from a t-distribution\na <- 5\ns <- 2\nn <- 20\nxbar <- 7\nt <- (xbar-a)/(s/sqrt(n))\nt\n 2*pt(-abs(t),df=n-1)\n ",
+    "created" : 1501387285789.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2314501207",
+    "id" : "2E80A63D",
+    "lastKnownWriteTime" : 4294967302,
+    "last_content_update" : 1501387350847,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled12"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

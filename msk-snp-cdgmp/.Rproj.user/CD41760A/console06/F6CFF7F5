@@ -1,0 +1,35 @@
+]0;~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning/msk-snp-cdgmp]133;C;]1337;RemoteHost=roynunez@Roys-MacBook-Air-7.local]1337;CurrentDir=/Users/roynunez/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning/msk-snp-cdgmp[?1034h]133;D;0]133;A😃[0m roynunez ~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning/msk-snp-cdgmp 
+$ ]133;Bl
+]133;C;total 8
+drwxr-xr-x  29 roynunez  staff  928 Sep 10  2017 [34mcdg-data[39;49m[0m/
+-rw-r--r--@  1 roynunez  staff  193 Sep 16 10:09 msk-snp-cdgmp.Rproj
+]1337;RemoteHost=roynunez@Roys-MacBook-Air-7.local]1337;CurrentDir=/Users/roynunez/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning/msk-snp-cdgmp]0;~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning/msk-snp-cdgmp]133;D;0]133;A😃[0m roynunez ~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning/msk-snp-cdgmp 
+$ ]133;B..
+]133;C;]1337;RemoteHost=roynunez@Roys-MacBook-Air-7.local]1337;CurrentDir=/Users/roynunez/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]0;~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]133;D;0]133;A😃[0m roynunez ~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning 
+$ ]133;Bl
+]133;C;total 40
+-rw-r--r--@  1 roynunez  staff  10436 Jul 13  2017 three_neuron_cddigmp.R
+-rw-r--r--@  1 roynunez  staff   6362 Jul 30  2017 gbm.R
+drwxr-xr-x   4 roynunez  staff    128 Sep 10  2017 [34m~[39;49m[0m/
+drwxr-xr-x  18 roynunez  staff    576 Sep 10  2017 [34mneural_networks[39;49m[0m/
+drwxr-xr-x  26 roynunez  staff    832 Sep 10  2017 [34mmulti_layer_neuron[39;49m[0m/
+drwxr-xr-x   7 roynunez  staff    224 Sep 10  2017 [34mdicyclic_gmp[39;49m[0m/
+drwxr-xr-x   8 roynunez  staff    256 Sep 16 10:09 [34mmsk-snp-cdgmp[39;49m[0m/
+]1337;RemoteHost=roynunez@Roys-MacBook-Air-7.local]1337;CurrentDir=/Users/roynunez/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]0;~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]133;D;0]133;A😃[0m roynunez ~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning 
+$ ]133;Bl
+]133;C;total 40
+-rw-r--r--@  1 roynunez  staff  10436 Jul 13  2017 three_neuron_cddigmp.R
+-rw-r--r--@  1 roynunez  staff   6362 Jul 30  2017 gbm.R
+drwxr-xr-x   4 roynunez  staff    128 Sep 10  2017 [34m~[39;49m[0m/
+drwxr-xr-x  18 roynunez  staff    576 Sep 10  2017 [34mneural_networks[39;49m[0m/
+drwxr-xr-x  26 roynunez  staff    832 Sep 10  2017 [34mmulti_layer_neuron[39;49m[0m/
+drwxr-xr-x   7 roynunez  staff    224 Sep 10  2017 [34mdicyclic_gmp[39;49m[0m/
+drwxr-xr-x   8 roynunez  staff    256 Sep 16 10:09 [34mmsk-snp-cdgmp[39;49m[0m/
+]1337;RemoteHost=roynunez@Roys-MacBook-Air-7.local]1337;CurrentDir=/Users/roynunez/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]0;~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]133;D;0]133;A😃[0m roynunez ~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning 
+$ ]133;Becho "# DeepLearningWithR" >> README.md
+]133;C;]1337;RemoteHost=roynunez@Roys-MacBook-Air-7.local]1337;CurrentDir=/Users/roynunez/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]0;~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]133;D;0]133;A😃[0m roynunez ~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning 
+$ ]133;Bgit init
+]133;C;Initialized empty Git repository in /Users/roynunez/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning/.git/
+]1337;RemoteHost=roynunez@Roys-MacBook-Air-7.local]1337;CurrentDir=/Users/roynunez/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]0;~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning]133;D;0]133;A😃[0m roynunez ~/Library/Mobile Documents/iCloud~com~gogolith~gocoed/Documents/machine_learning 
+$ ]133;Bgit add .
+]133;C;

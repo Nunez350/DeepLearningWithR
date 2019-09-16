@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ape)\nlibrary(phylobase)\nlibrary(phylotools)\nsetwd(\"/Users/roynunez/patric_3_pipeline/borrelia_rickettsia\")\ntr<-read.tree(\"~/Downloads/strep-tree-qui.dnd\")\ntr.unrooted <- unroot(tr)\n\n\noptions(max.print = 900)\nph <-  read.table(\"~/Desktop/jjj/var-fams-3.csv\", header = T , sep=\",\", row.names = 1)\nph.mat <- as.matrix(ph)\nph.t <- t(ph.mat)\nstrep.ace<-ace(ph.t[,1],tr,type= \"d\")\nco <- c(\"blue\", \"yellow\")\n#plot(tr, \"c\", F, no.margin = T, label.offset = 1)\n#plotting using the most parsimonious ancestral reconstruction method\nplot.mpr <- function(column=1) {\n  plot.phylo(tr.unrooted, main = colnames(ph.t)[column])\n  tmpr<-MPR(ph.t[,column], tr.unrooted, outgroup = \"gid_1311.1320\")\n  nodelabels(paste(\"[\", tmpr[, 1], \",\", tmpr[, 2], \"]\", sep = \"\")) \n  tiplabels(ph.t[,column][tr.unrooted$tip.label], adj = -2)\n  return(tmpr)\n}\ntmpr\nph.t\nplot.mpr(1)\n#intializing empty datalist to collect character states for each node\ndatalist <- data.frame(fam=character(), a=numeric(), b=numeric(), c=numeric())\nfor (i in 1:ncol(ph.t)) {\n  #for (i in 1:10) {\n  tmpr<-MPR(ph.t[,i], tr.unrooted, outgroup = \"gid_1311.1320\");\n  out<-c(colnames(ph.t)[i],tmpr[,1])\n  datalist <- rbind(datalist, data.frame(fam=colnames(ph.t)[i], a=tmpr[1,1], b=tmpr[2,1], c=tmpr[3,1]))\n}\n\ntmpr\nstrep.character.states<-do.call(rbind, datalist,quote = T)\nwrite.table(strep.character.states,\"strep-ancestrial-states.txt\",quote = FALSE)\n\n\n################################  \n#function computes the number of changes on each branch as well as the total amount of changes\nct.change <- function(dframe){\n  as.data.frame(df)\n  changect <- 0; n.changes<-0; branch<-0; total<-0; rowchange<-0; sumrow<-0;row.changes<-0\n  for (i in 1:ncol(dframe)){\n    for (j in 1:(nrow(dframe)-1)){\n      if (TRUE && dframe[j,i] != dframe[(j+1),i]) {\n        changect <- changect +1\n      } else{next}\n      if (TRUE && dframe[i,j] != dframe[i,(j+1)]) {\n        rowchange <- rowchange +1\n      } else{next}\n      \n      \n      n.changes[[j]]<-rowchange\n      \n    }\n    \n    rec<-changect; total<-total+rec\n    n.changes[[i]] <- changect\n    branch[[i]] <- colnames(strep.df[i])\n    n.changes[i+1] <-total\n    branch[[i+1]] <- \"total number of changes\"\n    n.changes[i+2]<-sumrow\n    df<-rbind(branch,n.changes)  \n    changect <- 0\n  }\n  return(df)\n}\n\ndim(strep.df)\nhead(strep.df)\n#converting matrix data into a dataframe to remove quotes and first column to appropiately allocate for colnames\nstrep.df <- as.data.frame(strep.character.states[,-1])\nrname<-strep.character.states[,1]\nrownames(strep.df)<-rname\nace.changes<-ct.change(strep.df)\nace.changes\n\n######################\nhead(datalist)\n#datalist <- data.frame(fam=character(), a=numeric(), b=numeric(), c=numeric())\nph.node.states <- cbind(ph, datalist[,2:4])\nstr(ph.node.states)\nph.node.states$a.1320 <- ph.node.states[,1] - ph.node.states[,6]\nph.node.states$c.1322 <- ph.node.states[,3] - ph.node.states[,8]\nph.node.states$c.1324 <- ph.node.states[,5] - ph.node.states[,8]\nph.node.states$b.c <- ph.node.states[,8] - ph.node.states[,7]\nph.node.states$b.1321 <- ph.node.states[,2] - ph.node.states[,7]\nph.node.states$a.b <- ph.node.states[,7] - ph.node.states[,6]\nph.node.states$a.1323 <- ph.node.states[,4] - ph.node.states[,6]\n\nwrite.table(ph.node.states, \"node.states.txt\", sep=\"\\t\", quote = F)\nhead(ph.node.states)\n?apply\napply(ph.node.states[,9:15], 2,function(x) length(which(x>0)))\ntr.unrooted <- unroot(tr)\ngains<-apply(ph.node.states[,9:15], 2, function(x) length(which(x>0)))\nlosses<-apply(ph.node.states[,9:15], 2, function(x) length(which(x<0)))\nplot(tr.unrooted)\nedgelabels(gains, adj = c(0.5,-0.25), col=2, frame= \"none\")\nedgelabels(losses, adj = c(0.5,1.25), col=4, frame= \"none\")\n\n\n",
+    "created" : 1499983785172.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "255290730",
+    "id" : "9B04B5DC",
+    "lastKnownWriteTime" : 6066188611752034310,
+    "last_content_update" : 1500030057656,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

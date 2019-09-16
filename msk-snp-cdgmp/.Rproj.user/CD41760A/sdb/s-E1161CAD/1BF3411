@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all=TRUE))\nsetwd(\"~/msk-snp-cdgmp/cdg-data/\")\nsnp.data<-read.csv(\"cdgSNPmatrix-Jinyuan_roy.csv\", sep =\",\", header = T, row.names = 1)\nsnp.by.gene <- split(snp.data, strtrim(rownames(snp.data), 8))\nsnp.by.gene.uniq <- lapply(snp.by.gene, function(x) unique(x))\ntest1 <- snp.by.gene.uniq[[1]]\ntest1<-t(test1)\n\ncdgmp.data<-read.csv(\"cdgTable.csv2\", sep =\",\", header =T)\nm.cdgmp<-tapply(cdgmp.data$logcdg,cdgmp.data$strains,mean )\nnames(m.cdgmp)[16]<-gsub(\"pa_.+_\", \"\", names(m.cdgmp)[16])\nm.cdgmp<-m.cdgmp[rownames(test1)]\n\nlibrary(ape)\nsetwd(\"~/msk-snp-cdgmp/cdg-data/\")\ntr=read.tree(\"cdg-tree-v1-mid.dnd\")\ntxt.names=read.table(\"cdg.strains.txt3\", sep=\"\\t\", header = F, row.names = 1)\ntr$tip.label <- as.character(txt.names[tr$tip.label,]) #\n#tr$tip.label<-as.character(txt.names$V2[match(tr$tip.label, txt.names$V1)])\nplot(tr, font =1)\nadd.scale.bar()\n\nlibrary(phylobase)\nlibrary(phylotools)\ntr$tip.label<-gsub(\"pa_.+_\", \"\",tr$tip.label)\nt.snp.data<-t(snp.data)\nace(t.snp.data[tr$tip.label,1],tr,type= \"d\")\n\nplot(tr)\ncolumn=1\nco <- c(\"blue\", \"yellow\")\ntr.unrooted<-unroot(tr)\nplot.mpr <- function(column=1) {\n  plot.phylo(tr, main = colnames(t.snp.data)[column])\n  tmpr<-MPR(t.snp.data[,column], tr.unrooted, outgroup = \"F34365\")\n  #nodelabels(paste(\"[\", tmpr[, 1], \",\", tmpr[, 2], \"]\", sep = \"\")) \n  tiplabels(t.snp.data[,column][tr.unrooted$tip.label], adj = -2)\n  return(tmpr)\n}\n\n\n\n\n\n\ntmpr\nclass(tr$tip.label)\ndim(tr$tip.label)\nmatch(tr$tip.label, t.snp.data)\nsnp.data\n\nrownames(t.snp.data)\ntr$tip.label\nmatch(rownames(t.snp.data), tr$tip.label)\nlength(match(rownames(t.snp.data), tr$tip.label))\nace([tr.unrooted$tip.label,1],tr,type= \"d\")\nsnp.data[tr$tip.label,1]\ndim(t.snp.data)\n\ntr$tip.label\n\nclass(t.snp.data[,1])\ndim(t.snp.data[,1])\nstructure(t.snp.data[,1])\n\ntr$tip.label\ndim(t(snp.data))\n######ace(t.snp.data[tr$tip.label,1],tr,type= \"d\")\n\ndim(as.matrix(t(snp.by.gene.uniq)))\nace(t(snp.data,tr, type=\"d\"))\ntr\ndim(t(snp.data))\nace([tr.unrooted$tip.label,1],tr,type= \"d\")\nlength(snp.by.gene.uniq)\ntr\nas.matrix(tr)\nph.t <- t(ph.mat)\nrownames(ph.t) <- gsub(\"X\", \"x\", rownames(ph.t))\nrownames(t.snp.data)[tr$tip.label,1]\ndim(t.snp.data[,1])\n\nace(t.snp.data[tr$tip.label,1],tr,type=\"d\")\nt.snp.data[tr$tip.label,1]\nstrep.ace<-ace(ph.t[tr.unrooted$tip.label,1],tr,type= \"d\")\nco <- c(\"blue\", \"yellow\")\n",
+    "created" : 1499984082529.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "133613469",
+    "id" : "1BF3411",
+    "lastKnownWriteTime" : 4294967302,
+    "last_content_update" : 1500033907328,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

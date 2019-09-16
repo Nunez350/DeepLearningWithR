@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all=TRUE))\nx<-iris\neta=0.1#the learning rate\ntargets=data.frame(t1=c(rep(1,50),rep(0,50),rep(0,50)),t2=c(rep(0,50),rep(1,50),rep(0,50)),t3=c(rep(0,50),rep(0,50),rep(1,50)))\ngneuron<-function(n){\n  w<-runif(4, 1e-3, 1e-2)#random weights\n  b<-runif(1)#random bias\n  x1<-iris[,1];x2<-iris[,2]; x3<-iris[,3]; x4<-iris[,4]\n  z=x1*w[1] + x2*w[2] + x3*w[3] + x4*w[4] +b\n  h<-list(z,w,b)\n  return(h)\n}\n\nl.neurons<-lapply(1:3, function(x) gneuron(x));names(l.neurons)<-c(\"z1\",\"z2\",\"z3\")\n\nweight_bias<-lapply(l.neurons, function(dx){\n  c(unlist(dx[2]),unlist(dx[3]))\n})\nm.weight_bias=matrix(unlist(weight_bias), ncol =3)\n\nx2<-as.matrix(x[,1:4], ncol =4);x2<-cbind(x2,rep(1, 150))\n\nm.weight_bias=matrix(unlist(weight_bias), ncol =3)\nwdf=data.frame(w1=numeric(), w2=numeric(),w3=numeric(),w4=numeric(), b=numeric()) \nnwdf<-list(wdf,wdf,wdf)\naccuracy<-list()\nfor (generation in 1:1000){\n  linear.combination<-x2 %*% m.weight_bias  \n  y <- exp(linear.combination) / rowSums(exp(linear.combination))\n  e<-targets-y\n  for (neuron in 1:3){\n    m.weight_bias[5,neuron]=m.weight_bias[5,neuron]-eta*-sum(e[,neuron])/150    \n    for (weight in 1:4){\n      gc<-x2[,weight]*e[,neuron]\n      m.weight_bias[weight,neuron]=m.weight_bias[weight,neuron] - eta* (-sum(gc)/150)\n    }\n    nwdf[[neuron]]<-rbind(nwdf[[neuron]],t(m.weight_bias)[neuron,])    \n  }  \n  accuracy[[generation]]<-length(which(max.col(y)==max.col(targets)))/150\n}\niris\n\n\nplot(0:0, xlim = c(1,1000), ylim=c(-3,3.5) ,ylab= \"weights\", xlab=\"Epochs\")\nlapply(nwdf[[1]][1:4],function(x){ lines(1:1000, x, col=\"2\", lty = sample(1:4, replace = F)) })\nlapply(nwdf[[2]][1:4],function(x){ lines(1:1000, x, col=\"3\", lty = sample(1:4, replace = F)) })\nlapply(nwdf[[3]][1:4],function(x){ lines(1:1000, x, col=\"4\", lty = sample(1:4, replace = F)) })\nlegend(\"topleft\", legend = c(\"neuron 1\",\"neuron 2\", \"neuron 3\"), col=c(\"2\",\"3\",\"4\"), pch=10, horiz = T, cex = .9) \n\nplot(1:1000, unlist(accuracy))\n\n# y\n# as.matrix(nwdf[[1]][1:5][1000,])\n# x2 %*% m.weight_bias\n# targets\n# \n# \n# sp0<-x[which(x$Species == \"setosa\"),]\n# sp1<-x[which(x$Species == \"versicolor\"),]\n# sp2<-x[which(x$Species == \"virginica\"),]\n# sp0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "created" : 1498676355864.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1640901268",
+    "id" : "E8C12FF1",
+    "lastKnownWriteTime" : 1499228412,
+    "last_content_update" : 1499228412,
+    "path" : "~/machine_learning/multi_layer_neuron/multi_neuron_classifier_iris.R",
+    "project_path" : "multi_neuron_classifier_iris.R",
+    "properties" : {
+        "notebook_format" : "html_document",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

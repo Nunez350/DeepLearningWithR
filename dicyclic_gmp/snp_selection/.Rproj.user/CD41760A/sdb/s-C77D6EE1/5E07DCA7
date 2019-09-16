@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all=TRUE))\nsource('~/machine_learning/dicyclic_gmp/snp_selection/di_ci_gmp.R')\nlibrary(ape)\ngene1<-t(snp.by.gene.uniq[[1]])\ngene1<-t(gene1)\ngene1\ntr=nj(dist.gene(gene1))\ngene1\ntr\nplot(tr)\nmin(tr$edge.length)\ntr$edge.length\nwhich(tr$edge.length == min(tr$edge.length))\nm.outgroup<-tr$tip.label[which(tr$edge.length == min(tr$edge.length))]\nm.outgroup\nr.tr<-root(tr,m.outgroup,resolve.root = TRUE)\nr.tr\n#o.tr<-order(tr$edge.length)\no.tr\n#na.omit(tr$tip.label[o.tr])\nf=multi2di(r.tr, random = TRUE)\nplot(f)\nscale()\npar(mfrow=c(1,1))\nlibrary(phangorn)\n?midpoint()\n\n\nreplicate(10, rTraitDisc(tr, states = c(0,1), rate = 100, model = \"ER\"))\n",
+    "created" : 1501475000692.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2076190009",
+    "id" : "5E07DCA7",
+    "lastKnownWriteTime" : 1501626300,
+    "last_content_update" : 1501626300423,
+    "path" : "~/machine_learning/dicyclic_gmp/snp_selection/neighbor_joining.R",
+    "project_path" : "neighbor_joining.R",
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

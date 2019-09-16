@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "co# simulate SNP-cdg correlation\nr <- 0.2 # desired correlation coefficient\nsigma <- matrix(c(1,r,r,1), ncol=2) # var-covariance matrix\ns <- chol(sigma) # choleski decomposition\nn <- 100 # number of random deviates (data points)\nz <- s %*% matrix(rnorm(n*2), nrow=2) # 100 correlated normally distributed deviates with cor(x,y)=r\nu <- pnorm(z) # get probabilities for each deviates\nsnp.states <- qbinom(u[1,], 1, 0.5) # discretize the 1st vector of probabilities into 0/1 with Bernoulli trial\nidx.0 <- which(snp.states == 0); # indices for \"0\"\nidx.1 <- which(snp.states == 1); # indices for \"1\"\n# boxplots with stripcharts\nboxplot(u[2,] ~ snp.states, main=\"cor=0.2\", xlab=\"SNP states\", ylab=\"CDG level\")\nstripchart(u[2,] ~ snp.states, vertical=T, pch=1, method=\"jitter\", col=2,  add=T)\nu\nsimulated.training<-u[2,]\nsnp.states\n\n\nt1 <- as.matrix(ifelse(simulated.training > -.5, 1,0 )) # high\nt2 <- as.matrix(ifelse(simulated.training < -.5 & simulated.training > -1.5, 1,0)) # medium \nt3 <- as.matrix(ifelse(simulated.training  < -1.5 , 1,0 )) #low\ntargets<-cbind(t1,t2,t3)\ntargets\n\n\nsnps\n",
+    "created" : 1500572006861.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3492143440",
+    "id" : "695253B",
+    "lastKnownWriteTime" : 1501407112,
+    "last_content_update" : 1501407112503,
+    "path" : "~/machine_learning/dicyclic_gmp/simulated_neurons/simulated_data.R",
+    "project_path" : "simulated_data.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

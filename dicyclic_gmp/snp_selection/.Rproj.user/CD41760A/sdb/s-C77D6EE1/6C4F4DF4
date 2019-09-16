@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\nx=sample(1:9,4)\nx\nx=sample(1:9)\nx=sample(1:9)\n?sample\nx=rbind(x,sample(1:9,4))\nx\ndet(x)\nd=as.matrix(c(2,5,6,1,-3,0,2,0,7),ncol=3, nrow=3)\nd\nd=rbind(c(2,5,6),c(1,-3,0),c(2,0,7))\nd\ndet(d)\neigen(d)\n",
+    "created" : 1502567211225.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1519789008",
+    "id" : "6C4F4DF4",
+    "lastKnownWriteTime" : 6,
+    "last_content_update" : 1502567813280,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 16,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

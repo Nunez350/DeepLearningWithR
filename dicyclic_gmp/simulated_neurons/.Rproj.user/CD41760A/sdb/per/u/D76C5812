@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "set.seed(30)\nlibrary(MASS)\ndata<-snp.by.gene.uniq[[1]]\n#apply(data,2,function(x) sum(is.na(x)))\ndata\ndim(data)\nindex <- sample(1:nrow(data),round(0.75*nrow(data)))\nindex\n\ntrain <- data[index,]\ntest <- data[-index,]\n\nlm.fit <- glm(medv~., data=train)#median\n?scale\nd.snp <- dist(data, method = \"manhattan\")\nhc.snp<-as.data.frame(hclust(d.snp))\nhc.snp\nhc.snp[index,]\ndim(hc.snp)\n\n?scale\n\n\nlibrary(neuralnet)\n?neuralnet\nneuralnet(f,data=t(snp.by.gene.uniq[[1]]),hidden=2)\nt<-rownames(m.cdgmp)[1:5]\nsnp.by.gene.uniq[[1]][t]\nf<-c(F22031~F23197+F30658+F34365+F5677)\n\ntt<-cbind(t(snp.by.gene.uniq[[1]]),m.cdgmp)\nneuralnet(rc~rg,tt, hidden=2)\ntt\nrc<-rownames(m.cdgmp)\nrg<-rownames(t(snp.by.gene.uniq[[1]]))\nt1<-as.matrix(weight_bias_list[[gene]]$training.snps)\nt2<- as.matrix(weight_bias_list[[gene]]$weight_bias)\n\nsnp.by.gene.uniq[[1]]\nm.cdgmp\n\n#response\nAND<-c(rep(0,7),1)\nOR<-c(0,rep(1,7))\n\n#response with predictors\nbinary.data<-data.frame(expand.grid(c(0,1),c(0,1),c(0,1)),AND,OR)\n\n#model\nnet<-neuralnet(AND+OR~Var1+Var2+Var3, binary.data,hidden=c(6,12,8),rep=10,err.fct=\"ce\",linear.output=FALSE)\n\n#plot ouput\npar(mar=numeric(4),family='serif\n\n\ntraininginput <-  as.data.frame(runif(50, min=0, max=100))\ntrainingoutput <- sqrt(traininginput)\ndim(traininginput)    \ndim(trainingoutput)\nhead(trainingoutput)\nhead(traininginput)\n\ndim( trainingdata)\n    #Column bind the data into one variable\n    trainingdata <- cbind(traininginput,trainingoutput)\n    colnames(trainingdata) <- c(\"Input\",\"Output\")\n    \n    #Train the neural network\n    #Going to have 10 hidden layers\n    #Threshold is a numeric value specifying the threshold for the partial\n    #derivatives of the error function as stopping criteria.\n    net.sqrt <- neuralnet(Output~Input,trainingdata, hidden=10, threshold=0.01)\n    print(net.sqrt)\n    \n    #Plot the neural network\n    plot(net.sqrt)\n    \n    #Test the neural network on some training data\n    testdata <- as.data.frame((1:10)^2) #Generate some squared numbers\n    net.results <- compute(net.sqrt, testdata) #Run them through the neural network\n    ",
+    "created" : 1501175690668.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1504383733",
+    "id" : "D76C5812",
+    "lastKnownWriteTime" : 1501175596,
+    "last_content_update" : 1501193156113,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled9"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
